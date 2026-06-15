@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#8fa7cc" />
+    <title>邀请函 | 2026届毕业晚会</title>
+    <meta
+      name="description"
+      content="以时光为序·赴璀璨星辰。诚挚邀请您一起遇见孩子们最好的自己。"
+    />
+    <meta property="og:title" content="邀请函 | 2026届毕业晚会" />
+    <meta
+      property="og:description"
+      content="以时光为序·赴璀璨星辰。点击开启邀请函。"
+    />
+    <meta property="og:image" content="assets/share-cover.jpg" />
+    <link rel="preload" as="image" href="assets/cover-closed.png" />
+    <link rel="preload" as="image" href="assets/record.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="invitation" aria-label="2026届毕业晚会邀请函">
+      <section class="scene" aria-labelledby="invite-title">
+        <div class="ambient-stars" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="paper-plane-layer" aria-hidden="true">
+          <span class="paper-plane plane-1"><span class="paper-trail"></span></span>
+          <span class="paper-plane plane-2"><span class="paper-trail"></span></span>
+          <span class="paper-plane plane-3"><span class="paper-trail"></span></span>
+          <span class="paper-plane plane-4"><span class="paper-trail"></span></span>
+          <span class="paper-plane plane-5"><span class="paper-trail"></span></span>
+          <span class="paper-plane plane-6"><span class="paper-trail"></span></span>
+        </div>
+
+        <h1 id="invite-title">邀请函</h1>
+        <p class="lead">以时光为序·赴璀璨星辰。</p>
+
+        <button class="album-button" type="button" aria-label="播放邀请函动画">
+          <span class="record-spin">
+            <img src="assets/record.png" alt="" />
+          </span>
+          <img class="album-cover cover-closed" src="assets/cover-closed.png" alt="2026届毕业晚会邀请函封面" />
+          <span class="tonearm" aria-hidden="true">
+            <span class="tonearm-pivot"></span>
+            <span class="tonearm-arm"></span>
+            <span class="tonearm-head"></span>
+          </span>
+          <span class="shine" aria-hidden="true"></span>
+        </button>
+
+        <div class="open-cue" aria-hidden="true">
+          <span class="pulse-dot"></span>
+          <span>点击抽出 · 播放邀请</span>
+        </div>
+
+        <section class="details" aria-label="邀请函内容">
+          <p class="details-kicker">2026届毕业晚会</p>
+          <div class="info-list">
+            <p><span>时间</span>2026年6月26日（周五）19:00</p>
+            <p><span>地点</span>小学部操场</p>
+          </div>
+          <p class="slogan">诚挚邀请您一起<br />遇见孩子们最好的自己</p>
+        </section>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
