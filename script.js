@@ -9,6 +9,10 @@ let timers = [];
 let volumeFrame = 0;
 let hasStarted = false;
 let hasPrimedAudio = false;
+let autoScrollTimer = 0;
+let autoScrollFrame = 0;
+let autoScrollCancelled = false;
+let autoScrollStarted = false;
 
 function clearTimers() {
   timers.forEach((timer) => window.clearTimeout(timer));
@@ -20,6 +24,88 @@ function clearVolumeFade() {
     window.cancelAnimationFrame(volumeFrame);
     volumeFrame = 0;
   }
+}
+
+function clearAutoScroll() {
+  if (autoScrollTimer) {
+    window.clearTimeout(autoScrollTimer);
+    autoScrollTimer = 0;
+  }
+
+  if (autoScrollFrame) {
+    window.cancelAnimationFrame(autoScrollFrame);
+    autoScrollFrame = 0;
+  }
+}
+
+function cancelAutoScroll() {
+  autoScrollCancelled = true;
+  clearAutoScroll();
+}
+
+function scrollToAgendaSlowly() {
+  if (autoScrollCancelled) {
+    return;
+  }
+
+  const agenda = document.querySelector(".agenda-section");
+  if (!agenda) {
+    return;
+  }
+
+  const startY = window.scrollY;
+  const targetY = Math.max(0, agenda.getBoundingClientRect().top + window.scrollY - 10);
+  const distance = targetY - startY;
+
+  if (Math.abs(distance) < 4) {
+    return;
+  }
+
+  const duration = 2200;
+  const startedAt = window.performance.now();
+
+  function easeInOutCubic(progress) {
+    return progress < 0.5
+      ? 4 * progress * progress * progress
+      : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+  }
+
+  function step(now) {
+    if (autoScrollCancelled) {
+      autoScrollFrame = 0;
+      return;
+    }
+
+    const progress = Math.min((now - startedAt) / duration, 1);
+    window.scrollTo(0, startY + distance * easeInOutCubic(progress));
+
+    if (progress < 1) {
+      autoScrollFrame = window.requestAnimationFrame(step);
+    } else {
+      autoScrollFrame = 0;
+    }
+  }
+
+  autoScrollFrame = window.requestAnimationFrame(step);
+}
+
+function scheduleAutoAgendaScroll() {
+  if (prefersReducedMotion || autoScrollStarted || autoScrollCancelled) {
+    return;
+  }
+
+  autoScrollStarted = true;
+
+  window.addEventListener("wheel", cancelAutoScroll, { passive: true, once: true });
+  window.addEventListener("touchstart", cancelAutoScroll, { passive: true, once: true });
+  window.addEventListener("touchmove", cancelAutoScroll, { passive: true, once: true });
+  window.addEventListener("pointerdown", cancelAutoScroll, { passive: true, once: true });
+  window.addEventListener("keydown", cancelAutoScroll, { once: true });
+
+  autoScrollTimer = window.setTimeout(() => {
+    autoScrollTimer = 0;
+    scrollToAgendaSlowly();
+  }, 3000);
 }
 
 function setMusicButtonState(isPlaying) {
@@ -69,6 +155,10 @@ function setVisualMusicState(isPlaying) {
   body.classList.toggle("is-music-playing", isPlaying);
   body.classList.toggle("is-music-paused", !isPlaying);
   body.classList.toggle("is-spinning", isPlaying && !prefersReducedMotion);
+
+  if (isPlaying && !prefersReducedMotion) {
+    scheduleAutoAgendaScroll();
+  }
 }
 
 function primeAudio() {
@@ -165,6 +255,9 @@ function playInvitation() {
 
   hasStarted = true;
   clearTimers();
+  clearAutoScroll();
+  autoScrollCancelled = false;
+  autoScrollStarted = false;
   primeAudio();
   body.classList.remove(
     "is-playing",

@@ -1250,12 +1250,8 @@ body.show-details .agenda-section {
   }
 
   .album-button {
-    width: min(93vw, 48svh, 420px);
-    margin-top: 10px;
-  }
-
-  body.show-details .album-button {
     width: min(88vw, 42svh, 380px);
+    margin-top: 10px;
   }
 
   .open-cue {
