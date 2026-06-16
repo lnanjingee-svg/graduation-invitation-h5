@@ -20,6 +20,13 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <button class="music-toggle" type="button" aria-label="暂停背景音乐" aria-pressed="true" hidden>
+      <span class="music-symbol" aria-hidden="true">
+        <span class="music-note-dot"></span>
+      </span>
+    </button>
+    <audio class="bgm-audio" src="assets/bgm.mp3" loop preload="auto"></audio>
+
     <main class="invitation" aria-label="2026届毕业晚会邀请函">
       <section class="scene" aria-labelledby="invite-title">
         <div class="ambient-stars" aria-hidden="true">
@@ -66,6 +73,60 @@
             <p><span>地点</span>小学部操场</p>
           </div>
           <p class="slogan">诚挚邀请您一起<br />遇见孩子们最好的自己</p>
+        </section>
+
+        <div class="scroll-cue" aria-hidden="true">
+          <span>向下查看典礼议程</span>
+          <span class="scroll-arrow"></span>
+        </div>
+
+        <section class="agenda-section" aria-labelledby="agenda-title">
+          <div class="agenda-panel">
+            <p class="agenda-eyebrow">毕业典礼议程</p>
+            <h2 id="agenda-title">以时光为序·赴璀璨星辰</h2>
+            <p class="agenda-subtitle">西安交通大学附属中学小学部2026届毕业典礼议程</p>
+
+            <div class="agenda-prologue">
+              <span>序章</span>
+              <p>时光之门·逐梦入场</p>
+              <p>乐享乐曲·有序入场</p>
+            </div>
+
+            <ol class="agenda-list">
+              <li class="agenda-item">
+                <span class="agenda-index">01</span>
+                <span class="agenda-text">奏唱国歌</span>
+              </li>
+              <li class="agenda-item">
+                <span class="agenda-index">02</span>
+                <span class="agenda-text">校长致辞</span>
+              </li>
+              <li class="agenda-item">
+                <span class="agenda-index">03</span>
+                <span class="agenda-text">颁发毕业证书 送上毕业寄语</span>
+              </li>
+              <li class="agenda-item">
+                <span class="agenda-index">04</span>
+                <span class="agenda-text">毕业生代表发言</span>
+              </li>
+              <li class="agenda-item">
+                <span class="agenda-index">05</span>
+                <span class="agenda-text">饮水思源 心怀感恩</span>
+              </li>
+              <li class="agenda-item">
+                <span class="agenda-index">06</span>
+                <span class="agenda-text">家长嘱托</span>
+              </li>
+              <li class="agenda-item">
+                <span class="agenda-index">07</span>
+                <span class="agenda-text">赠送锦旗及礼物</span>
+              </li>
+              <li class="agenda-item">
+                <span class="agenda-index">08</span>
+                <span class="agenda-text">毕业节目展演</span>
+              </li>
+            </ol>
+          </div>
         </section>
       </section>
     </main>
