@@ -172,6 +172,7 @@ function playInvitation() {
     "is-spinning",
     "has-tonearm",
     "show-details",
+    "details-visible",
     "has-music-control",
     "is-music-playing",
     "is-music-paused",
@@ -183,6 +184,7 @@ function playInvitation() {
     const pulledDelay = prefersReducedMotion ? 300 : 1900;
     const tonearmDelay = prefersReducedMotion ? 420 : 950;
     const detailsDelay = prefersReducedMotion ? 550 : 2450;
+    const detailsVisibleDelay = prefersReducedMotion ? 650 : 2700;
 
     timers.push(
       window.setTimeout(() => body.classList.add("is-pulled"), pulledDelay),
@@ -191,6 +193,7 @@ function playInvitation() {
         body.classList.add("show-details");
         startMusic();
       }, detailsDelay),
+      window.setTimeout(() => body.classList.add("details-visible"), detailsVisibleDelay),
     );
   });
 }
