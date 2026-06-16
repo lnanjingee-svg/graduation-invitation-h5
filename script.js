@@ -161,6 +161,11 @@ function setVisualMusicState(isPlaying) {
   }
 }
 
+function markAudioBlocked() {
+  body.classList.remove("is-music-playing");
+  setMusicButtonState(false);
+}
+
 function primeAudio() {
   if (!bgmAudio || hasPrimedAudio) {
     return;
@@ -182,9 +187,9 @@ function primeAudio() {
 
 function startMusic() {
   revealMusicControl();
+  setVisualMusicState(true);
 
   if (!bgmAudio) {
-    setVisualMusicState(true);
     return;
   }
 
@@ -193,11 +198,10 @@ function startMusic() {
     .then(() => {
       hasPrimedAudio = true;
       bgmAudio.muted = false;
-      setVisualMusicState(true);
       fadeAudioTo(targetVolume);
     })
     .catch(() => {
-      setVisualMusicState(false);
+      markAudioBlocked();
     });
 }
 
@@ -276,15 +280,16 @@ function playInvitation() {
 
     const pulledDelay = prefersReducedMotion ? 300 : 1900;
     const tonearmDelay = prefersReducedMotion ? 420 : 950;
-    const detailsDelay = prefersReducedMotion ? 550 : 2450;
-    const detailsVisibleDelay = prefersReducedMotion ? 650 : 2700;
+    const musicDelay = prefersReducedMotion ? 500 : 2100;
+    const detailsDelay = prefersReducedMotion ? 600 : 2450;
+    const detailsVisibleDelay = prefersReducedMotion ? 760 : 2700;
 
     timers.push(
       window.setTimeout(() => body.classList.add("is-pulled"), pulledDelay),
       window.setTimeout(() => body.classList.add("has-tonearm"), tonearmDelay),
+      window.setTimeout(startMusic, musicDelay),
       window.setTimeout(() => {
         body.classList.add("show-details");
-        startMusic();
       }, detailsDelay),
       window.setTimeout(() => body.classList.add("details-visible"), detailsVisibleDelay),
     );
