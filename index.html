@@ -15,8 +15,11 @@
       content="以时光为序·赴璀璨星辰。点击开启邀请函。"
     />
     <meta property="og:image" content="assets/share-cover.jpg" />
-    <link rel="preload" as="image" href="assets/cover-closed.png" />
-    <link rel="preload" as="image" href="assets/record.png" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="500" />
+    <meta property="og:image:height" content="500" />
+    <link rel="preload" as="image" href="assets/cover-closed.webp" type="image/webp" />
+    <link rel="preload" as="image" href="assets/record.webp" type="image/webp" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -50,9 +53,9 @@
 
         <button class="album-button" type="button" aria-label="播放邀请函动画">
           <span class="record-spin">
-            <img src="assets/record.png" alt="" />
+            <img src="assets/record.webp" alt="" loading="eager" decoding="async" fetchpriority="high" />
           </span>
-          <img class="album-cover cover-closed" src="assets/cover-closed.png" alt="2026届毕业晚会邀请函封面" />
+          <img class="album-cover cover-closed" src="assets/cover-closed.webp" alt="2026届毕业晚会邀请函封面" loading="eager" decoding="async" fetchpriority="high" />
           <span class="tonearm" aria-hidden="true">
             <span class="tonearm-pivot"></span>
             <span class="tonearm-arm"></span>
